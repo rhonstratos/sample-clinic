@@ -2,46 +2,36 @@
 
 namespace App\Models;
 
+use App\Models\Traits\PatientRelationships;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Patients extends Model
 {
-    use HasFactory;
+    use HasFactory, PatientRelationships;
 
-    public function admission()
+    public function fullName(): Attribute
     {
-        $this->hasMany(Admissions::class);
-    }
-
-    public function vitalSigns()
-    {
-        $this->hasMany(VitalSigns::class);
-    }
-
-    public function fluidIntakes()
-    {
-        $this->hasMany(FluidIntakes::class);
-    }
-
-    public function nursesNotes()
-    {
-        $this->hasMany(NursesNotes::class);
-    }
-
-    public function kardexes()
-    {
-        $this->hasMany(Kardexes::class);
-    }
-
-    public function dischargeSummary()
-    {
-        $this->hasMany(DischargeSummary::class);
-    }
-
-    public function physiciansOrders()
-    {
-        $this->hasMany(PhysiciansOrders::class);
+        return Attribute::make(
+        get: function () {
+            return Str::title(
+                implode(
+                    ' ',
+                    array_filter(
+                        [
+                            $this->fname,
+                            $this->mname,
+                            $this->lname
+                        ],
+                        // remove middle name if blank
+                        fn($item) => !empty($item) //shorthand function
+                    )
+                )
+            );
+        }
+        );
     }
 
     protected $guarded = [];

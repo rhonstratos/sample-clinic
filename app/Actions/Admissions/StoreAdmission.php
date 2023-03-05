@@ -9,14 +9,15 @@ class StoreAdmission
 {
     public function handle(Request $request, Patients $patient)
     {
-        $admission_start_end_diff = $request->admission['start']->diffForHumans(
-            $request->admission['end'],
+        $admission_start_end_diff = Carbon::parse($request->admission['start'])->diffForHumans(
+            Carbon::parse($request->admission['end']),
             [
                 'parts' => 6,
                 'join' => ', ',
                 'short' => true
             ]
         );
+
         return Admissions::create([
             'patient_id' => $patient->id,
             'ward_room' => $request->wardRoom,

@@ -11,7 +11,7 @@ class Admissions extends Model
 
     public function patient()
     {
-        $this->belongsTo(Patients::class);
+        return $this->belongsTo(Patients::class);
     }
 
     protected $guarded = [];
@@ -20,7 +20,7 @@ class Admissions extends Model
         'admission' => 'array',
         'insurance' => 'array',
         'diagnosis' => 'array',
-        'operationProcedure' => 'array',
+        'operation_procedure' => 'array',
         'alergy' => 'array',
         'admission_start' => 'date',
         'admission_end' => 'date',

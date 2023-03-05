@@ -15,8 +15,6 @@ return new class extends Migration {
             $table->foreignId('patient_id')->constrained('patients');
             $table->string('physician', 255)->nullable();
             $table->longText('notes')->nullable();
-
-            $table->string('notes', 255)->nullable();
             $table->string('date', 255)->nullable();
             $table->string('weight', 255)->nullable();
             $table->string('temperature', 255)->nullable();

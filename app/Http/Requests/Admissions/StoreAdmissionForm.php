@@ -39,8 +39,8 @@ class StoreAdmissionForm extends FormRequest
             'address' => ['required', 'array'],
             'address.*' => ['required', 'string', 'max:255'],
 
-            'permanentAddress' => ['required', 'array'],
-            'permanentAddress.*' => ['required', 'string', 'max:255'],
+            'permanentAddress' => ['required_unless:sameAsAddress,1', 'array'],
+            'permanentAddress.*' => ['required_unless:sameAsAddress,1', 'nullable', 'string', 'max:255'],
             'seniorNumber' => ['nullable', 'string', 'max:255'],
 
             'relatives' => ['required', 'array', 'min:1'],
@@ -59,6 +59,7 @@ class StoreAdmissionForm extends FormRequest
 
             'admission' => [' required', 'array', 'min:2'],
             'admission.*' => [' required', 'date'],
+            'admission.duration' => ['nullable', 'string', 'max:255'],
 
             'admittingPhysician' => ['required', 'string', 'max:255'],
             'admittingClerk' => ['required', 'string', 'max:255'],
@@ -71,9 +72,8 @@ class StoreAdmissionForm extends FormRequest
             'insurance' => ['nullable', 'array'],
             'insurance.*' => ['nullable', 'string', 'max:255'],
 
-            'diagnosis' => ['required', 'array'],
-            'diagnosis.*' => ['required', 'array'],
-            'diagnosis.*.other' => ['nullable', 'array'],
+            'diagnosis' => ['nullable', 'array'],
+            'diagnosis.*' => ['nullable', 'string', 'max:255'],
 
             'idcCode' => ['required', 'string', 'max:255'],
             'icpmCode' => ['required', 'string', 'max:255'],

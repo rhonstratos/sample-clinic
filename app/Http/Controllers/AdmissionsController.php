@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Admissions\StoreAdmission;
 use App\Actions\Patients\StorePatient;
 use App\Http\Requests\Admissions\StoreAdmissionForm;
-use App\Models\Admissions\{Admissions};
+use App\Models\Admissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +22,9 @@ class AdmissionsController extends Controller
 
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('pages.admissions.index');
+        $admissions = Admissions::query()->with(['patient'])->paginate(20);
+        return view('pages.admissions.index')
+            ->with(compact('admissions'));
     }
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {

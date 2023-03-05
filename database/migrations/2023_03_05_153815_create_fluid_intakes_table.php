@@ -18,11 +18,11 @@ return new class extends Migration {
             $table->string('time', 255)->nullable();
             $table->string('oral', 255)->nullable();
             $table->string('parental', 255)->nullable();
-            $table->string('total', 255)->nullable();
+            $table->string('intake_total', 255)->nullable();
             $table->string('urine', 255)->nullable();
             $table->string('drainage', 255)->nullable();
             $table->string('others', 255)->nullable();
-            $table->string('total', 255)->nullable();
+            $table->string('output_total', 255)->nullable();
 
             $table->timestamps();
         });
